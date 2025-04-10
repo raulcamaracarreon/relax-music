@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Música para Meditación</title>
+    <script src="{{ url_for('static', filename='js/audioController.js') }}"></script>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #eef2f3; }
+        .track { margin-bottom: 20px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0 2px 4px #ccc; }
+        .track h3 { margin-top: 0; }
+        label { display: block; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>🎵 Generador de Música Incidental para Meditación</h1>
+    <button onclick="startAudio()">🎧 Iniciar Audio</button>
+    <button onclick="stopAll()">🛑 Detener Todo</button>
+
+
+    <div id="tracks">
+        {% for i in range(8) %}
+        <div class="track">
+            <h3>Track {{ i+1 }} - {{ filenames[i] }}</h3>
+            <audio id="audio{{ i }}" src="{{ url_for('static', filename='audio/' + filenames[i]) }}" loop></audio>
+            <label><input type="checkbox" onchange="togglePlay({{ i }})"> Activar reproducción</label>
+            <label>Volumen: <input type="range" min="0" max="1" step="0.01" value="1" onchange="setVolume({{ i }}, this.value)"></label>
+            <label>Filtro (Low Pass Cutoff): <input type="range" min="500" max="10000" step="100" value="10000" onchange="setFilter({{ i }}, this.value)"></label>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

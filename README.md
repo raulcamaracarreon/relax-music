@@ -42,7 +42,7 @@ RELAX/
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/RELAX.git
+   git clone https://github.com/raulcamaracarreon/relax-music.git
    cd RELAX
 
 
